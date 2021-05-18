@@ -1,0 +1,98 @@
+<form (ngSubmit)="onClickSubmit()"
+	  [formGroup]="formService.formGroup"
+	  class="dialog-content"
+	  fxLayout="column"
+	  fxLayoutAlign.gt-md="start space-between"
+	  fxLayoutAlign.lt-lg="start center"
+	  fxLayoutGap="16px">
+	<h1 class="dialog-title" fxFlex>Registro de Cliente</h1>
+	<div fxFlex
+		 fxLayout.gt-md="row"
+		 fxLayout.lt-lg="column"
+		 fxFlexAlign.gt-md="space-between start"
+		 fxLayoutAlign.lt-lg="space-between center"
+		 fxLayoutGap="24px">
+		<img [src]="data ? data.imageURL : defaultImageProfile" alt="Usuário" class="user-image"/>
+		<div fxFlex fxLayout="column">
+			<h2>Dados Pessoais</h2>
+			<mat-form-field appearance="outline">
+				<mat-label>Inscrição</mat-label>
+				<input formControlName="subscription" mask="00.000.000/0000-00" matInput required>
+			</mat-form-field>
+			<mat-form-field appearance="outline">
+				<mat-label>Apelido</mat-label>
+				<input formControlName="nickname" matInput required>
+			</mat-form-field>
+			<mat-form-field appearance="outline">
+				<mat-label>Nome</mat-label>
+				<input formControlName="name" matInput required>
+			</mat-form-field>
+			<div fxLayout="column" fxLayoutGap="8px">
+				<h2>Status Atual</h2>
+				<mat-radio-group
+					[disabled]="!data"
+					aria-label="Selecione uma opção"
+					formControlName="status"
+					fxLayout="row"
+					fxLayoutGap="12px">
+					<mat-radio-button [checked]="true" [value]="'Ativado'">Ativado</mat-radio-button>
+					<mat-radio-button [value]="'Desativado'">Desativado</mat-radio-button>
+					<mat-radio-button [value]="'Suspenso'">Suspenso</mat-radio-button>
+				</mat-radio-group>
+			</div>
+		</div>
+		<div fxFlex="40" fxLayout="column" fxLayoutAlign="start space-between">
+			<h2>Emails</h2>
+			<div class="email-box"
+				 fxLayout="column"
+				 fxLayoutAlign="start space-between"
+				 fxLayoutGap="16px">
+				<div *ngFor="let email of (emails | async)"
+					 fxFlex
+					 fxLayout="row"
+					 fxLayoutAlign="space-between start"
+					 fxLayoutGap="16px">
+					<div fxFlex
+						 fxLayout="row"
+						 fxLayoutAlign="space-between start"
+						 fxLayoutGap="16px">
+						<mat-icon style="color: #B1C4B6">email</mat-icon>
+						<span>{{email.category.name}}</span>
+						<span>{{email.name}}</span>
+						<span>{{email.email}}</span>
+					</div>
+					<div fxFlexAlign="end center" fxLayout="row" fxLayoutGap="4px">
+						<mat-icon class="email-action-button" (click)="editEmail(email)">edit</mat-icon>
+						<mat-icon class="email-action-button" (click)="removeEmail(email.id)">delete</mat-icon>
+					</div>
+				</div>
+				<div *ngIf="data?.id; then addEmailEnable else addEmailDisable"></div>
+				<ng-template #addEmailEnable>
+					<button (click)="createEmail()"
+							*ngIf="data?.id"
+							mat-raised-button
+							type="button">
+						Adicionar Email
+					</button>
+				</ng-template>
+				<ng-template #addEmailDisable>
+					<h4 *ngIf="!data?.id">Você precisa estar cadastrado para adicionar um email</h4>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+	<div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+		<button (click)="closeModal(false)"
+				class="dialog-button-style"
+				color="warn"
+				mat-raised-button
+				type="button">
+			Cancelar
+		</button>
+		<button class="dialog-button-style primary-background"
+				mat-raised-button
+				type="submit">
+			Salvar
+		</button>
+	</div>
+</form>

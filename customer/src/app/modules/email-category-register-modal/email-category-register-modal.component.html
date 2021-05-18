@@ -1,0 +1,30 @@
+<form (ngSubmit)="onClickSubmit()"
+	  [formGroup]="formService.formGroup"
+	  class="register-dialog"
+	  fxFlex
+	  fxLayout="column"
+	  fxLayoutAlign="start space-between"
+	  fxLayoutGap="16px">
+	<h1 class="dialog-title" fxFlex>Nova Categoria</h1>
+	<div fxFlex fxLayout="column">
+		<mat-form-field appearance="outline">
+			<mat-label>Nome</mat-label>
+			<input formControlName="name" matInput required>
+			<mat-icon matSuffix style="color: #B1C4B6">label</mat-icon>
+		</mat-form-field>
+	</div>
+	<div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+		<button (click)="closeModal(false)"
+				class="dialog-button-style"
+				color="warn"
+				type="button"
+				mat-raised-button>
+			Cancelar
+		</button>
+		<button class="dialog-button-style primary-background"
+				mat-raised-button
+				type="submit">
+			Salvar
+		</button>
+	</div>
+</form>

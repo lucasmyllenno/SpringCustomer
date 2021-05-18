@@ -1,0 +1,47 @@
+@import "../../../assets/styles/project-style";
+
+@media only screen and (max-width: 960px) {
+  .dialog-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+@media only screen and (min-width: 961px) {
+  .dialog-content {
+    width: 60vw;
+    overflow: hidden;
+  }
+}
+
+.dialog-content {
+  h2 {
+    font-size: large;
+    color: darkgray;
+  }
+}
+
+.user-image {
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+}
+
+input {
+  width: 100%;
+}
+
+.email-box {
+  font-size: small;
+  color: dimgray;
+  max-height: 600px;
+  border-left: whitesmoke solid 1px;
+  padding: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.email-action-button {
+  color: #B1C4B6;
+  cursor: pointer;
+}
